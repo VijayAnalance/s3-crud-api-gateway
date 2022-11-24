@@ -12,7 +12,7 @@ provider:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
 
   custom:
-    fileBucketName: ${self:service}-${self:provider.stage}
+    fileBucketName: s3-crud-api-file-bucket-${self:provider.stage}
 
   resources:
     Resources:
