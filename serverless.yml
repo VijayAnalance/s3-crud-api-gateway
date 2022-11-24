@@ -1,4 +1,4 @@
-service: s3-file-api
+service: s3-crud-api-file
 
 provider:
   name: aws
@@ -15,12 +15,12 @@ plugins:
   - serverless-iam-roles-per-function
 
 custom:
-  fileBucketName: s3-file-bucket-${self:provider.stage}
+  fileBucketName: s3-crud-api-file-bucket-${self:provider.stage}
 
 functions:
-  s3FileUploader:
+  s3CrudApiFileUpload:
     handler: src/upload.handler
-    name: s3-file-uploader
+    name: s3-crud-api-file-upload
     description: A lambda handler that uploads a file to an S3 bucket based on an API Gateway trigger.
     events:
       - http:
@@ -31,9 +31,9 @@ functions:
         Action:
           - "s3:Put*"
         Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
-  s3FileGet:
+  s3CrudApiFileGet:
     handler: src/get.handler
-    name: s3-file-get
+    name: s3-crud-api-file-get
     description: A lambda handler that retrieves a file from an S3 bucket based on an API Gateway trigger.
     events:
       - http:
@@ -44,9 +44,9 @@ functions:
         Action:
           - "s3:Get*"
         Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
-  s3FileDelete:
+  s3CrudApiFileDelete:
     handler: src/delete.handler
-    name: s3-file-delete
+    name: s3-crud-api-file-delete
     description: A lambda handler that deletes a file from an S3 bucket based on an API Gateway trigger.
     events:
       - http:
